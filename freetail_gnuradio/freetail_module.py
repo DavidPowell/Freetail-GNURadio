@@ -7,13 +7,14 @@ import serial
 import serial.tools.list_ports
 
 header = [b'\x7A', b'\x7A']
+usb_id_regex = ".*16C0:0483.*" # Regex containing USB VID:PID of Teensy in Serial mode
 
 def open_freetail_module(firmware_version):
     "Find the serial port with the Freetail module and open it"
 
     correct_serial = None
 
-    for port in serial.tools.list_ports.comports():
+    for port in serial.tools.list_ports.grep(usb_id_regex):
         ser = serial.Serial(port.device, timeout=1)
         ser.write(b'I')
     
