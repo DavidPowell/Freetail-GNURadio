@@ -27,9 +27,9 @@ setup(name='Freetail-GNURadio',
     classifiers=[
         'Intended Audience :: Education',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
-        'Topic :: Scientific/Engineering'
+        'Topic :: Scientific/Engineering',
+        'Programming Language :: Python :: 3.8',
     ],
-    # include_package_data = True,
     package_data={
         'freetail_gnuradio': ['grc/*', 'VERSION'],
     },
