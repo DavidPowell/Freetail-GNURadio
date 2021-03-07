@@ -1,5 +1,5 @@
-id: 'signal_noise_histrogram'
-label: 'Signal and Noise Histograms'
+id: 'target_histrogram'
+label: 'Target Return Histograms'
 category: '[Radar and Sonar]'
 
 parameters:
@@ -7,13 +7,10 @@ parameters:
   label: 'Return time of target'
   dtype: float
 
-- id: noise_time
-  label: 'Return time of noise'
-  dtype: float
-
 - id: samples_per_pulse
   label: 'Samples per pulse'
   dtype: int
+  default: 'samples_per_pulse'
 
 - id: samp_rate
   label: 'Sample rate'
@@ -25,25 +22,30 @@ parameters:
   dtype: int
   default: 100
 
+- id: histogram_filename
+  label: 'Histogram filename'
+  dtype: string
+  default: ''
+
 - id: gui_hint
   label: GUI Hint
   dtype: gui_hint
   hide: part
 
 templates:
-  imports: from freetail_gnuradio.signal_noise_histogram import signal_noise_histogram
+  imports: from freetail_gnuradio.target_histogram import target_histogram
   var_make: self.${id} = None
   make: |-
       <%
           win = '_%s_signal_noise_histogram'%id
       %>\
-      ${win} = signal_noise_histogram(${target_time}, ${noise_time}, ${samples_per_pulse}, ${samp_rate}, ${num_pulses})
+      ${win} = target_histogram(${target_time}, ${samples_per_pulse}, ${samp_rate}, ${num_pulses}, ${histogram_filename})
       self.${id} = ${win}
       ${gui_hint() % win}
   callbacks:
   - set_num_pulses(${num_pulses})
   - set_target_time(${target_time})
-  - set_noise_time(${noise_time})
+  - set_histogram_filename(${histogram_filename})
 
 inputs:
 - domain: stream
