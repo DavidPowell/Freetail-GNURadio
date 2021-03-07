@@ -18,7 +18,7 @@ parameters:
 - id: samples_per_pulse
   label: 'Samples per pulse'
   dtype: int
-  default: 1000
+  default: 'samples_per_pulse'
 
 - id: normalize_output
   label: 'Normalize Output Level'
